@@ -1,0 +1,125 @@
+\section{ساختمان رویداد}\label{sec:event-structure}
+
+روش‌های متفاوتی برای توصیف و مدل کردن
+سیستم‌های هم‌روند ارائه شده‌اند.
+در توصیف به کمک اتوماتون محدود قطعی
+\LTRfootnote{Deterministic finite automaton}
+معمولا ترتیب‌های متفاوت اجرای هم‌روند به صورت مستقل
+در ساختار مدل توصیف می‌شوند. این روش، ویژگی‌هایی از
+یک سیستم هم‌روند واقعی، مانند امکان رخ دادن دو رویداد
+به صورت مستقل و بدون وابستگی را فراهم نمی‌کند.
+\textit{ساختمان رویداد}
+\LTRfootnote{Event structure}
+مدلی برای توصیف سیستم‌های هم‌روند است که مشابه
+اتوماتون محدود غیرقطعی
+\LTRfootnote{Non-deterministic finite automaton}
+هم‌روندی رویدادها را به صورت صریح مشخص می‌کند.
+
+\begin{definition}\label{def:event-structure}
+  \textit{ساختمان رویداد}
+  $\ES$
+  یک سه‌تایی به فرم
+  $(E, \#, \vdash)$
+  است که در آن:
+  \begin{enumerate}
+    \item $E$
+    یک مجموعه از رویداد‌ها است.
+    \item $\#$
+    رابطه
+    \textit{تعارض}
+    \LTRfootnote{Conflict}
+    است که یک رابطه دودویی متقارن و غیربازتابی بر روی مجموعه
+    $E$
+    می‌باشد.
+
+    \item $\vdash\;\subseteq \Con(\ES) \times E$
+    رابطه
+    \textit{فعال‌سازی}
+    \LTRfootnote{Enabling}
+    است که شرط زیر را برقرار می‌کند:
+    \begin{equation*}
+        (X \vdash e) \wedge (X \subseteq Y \in \Con(\ES))
+        \implies Y \vdash e
+    \end{equation*}
+  \end{enumerate}
+\end{definition}
+
+در رابطه بالا
+$\Con$
+(مخفف
+\lr{Consistent})،
+زیرمجموعه‌ای از مجموعه توانی رویدادها است که اعضای آن فاقد تعارض باشند.
+
+به صورت شهودی، رابطه تعارض برای جلوگیری از رخ دادن
+دو رویداد در یک اجرا از سیستم،
+و رابطه فعال‌سازی برای ایجاد وابستگی بین رویدادها استفاده می‌شود.
+برای مشخص کردن مجموعه کمینه وابستگی‌های یک رویداد،
+رابطه فعال‌سازی کمینه را تعریف می‌کنیم.
+
+\begin{definition}\label{def:min-enabling}
+  به ازای هر ساختمان رویداد، می‌توانیم رابطه
+  \textit{فعال‌سازی کمینه}
+  را به صورت زیر تعریف کنیم:
+  \begin{equation*}
+    X \minen e \iff
+    (X \vdash e) \wedge
+    (\forall Y \subseteq X.\;Y \vdash e \implies Y=X)
+  \end{equation*}
+\end{definition}
+
+\begin{proposition}
+  در هر ساختمان رویداد داریم
+  \begin{equation*}
+    Y \vdash e \implies
+    \exists X \subseteq Y.\;X \minen e
+  \end{equation*}
+\end{proposition}
+
+برای مشخص کردن وضعیت یک سیستم در هر لحظه
+از مفهومی به نام پیکر‌بندی
+\LTRfootnote{Configuration}
+استفاده می‌شود. یک پیکربندی
+مجموعه‌ای شامل رویدادهایی است که تا آن لحظه در سیستم رخ داده‌اند.
+
+\begin{definition}\label{def:configuration}
+  اگر
+  $\ES = (E,\#,\vdash)$
+  یک ساختمان رویداد باشد، یک
+  \textit{پیکربندی}
+  آن یک زیرمجموعه از رویداد‌ها
+  $X \subseteq E$
+  است که شرایط زیر را داشته باشد:
+  \begin{enumerate}
+      \item $X \in \Con(\ES)$
+      \item $
+        \forall e \in X.\;
+        \exists e_0, \cdots, e_n \in X.\;
+        e_n = e \wedge
+        \forall i \leq n. \set{e_0, \cdots, e_{i-1}} \vdash e_i
+      $
+  \end{enumerate}
+\end{definition}
+
+مجموعه همه پیکربندی‌های یک ساختمان رویداد مانند
+$\ES$
+با
+$\Conf(\ES)$
+نمایش داده می‌شود.
+
+\begin{example}\label{ex:event-structure}
+  ساختمان رویدادی با مولفه‌های زیر در نظر بگیریم:
+  \begin{align*}
+    E & = \set{a, b, c} \\
+    \# & = \varnothing \\
+    \vdash & :
+      \varnothing \vdash a,\,
+      \varnothing \vdash b,\,
+      \set{a,b} \vdash c
+  \end{align*}
+
+  شبکه پیکربندی‌های این ساختمان در شکل
+  \ref{fig:es-example-configs}
+  آمده است.
+
+  \input{figures/es-example-configs.tex}
+\end{example}
