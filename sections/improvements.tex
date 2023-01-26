@@ -1,0 +1,71 @@
+\section{بهبود پیچیدگی زمانی استدلال علّی}\label{sec:improvements}
+
+\subsection{علت واقعی تک‌متغیره}
+
+\subsection{کاهش اندازه مدل علّی}
+
+دوتا از منابع پیچیدگی در مساله تصمیم علیت،
+به دلیل جستجو در مجموعه توانی متغیرهای مدل علّی هستند.
+به همین دلیل، می‌توانیم تلاش کنیم تا اندازه مدل علّی را
+تا حد ممکن کوچک کنیم. مفهوم
+\textit{تصویر}
+مدل علّی که توسط هاپکینز در
+\cite{hopkins2002strategies}
+گامی در جهت حذف تعدادی از متغیرها در
+یک نمونه
+\LTRfootnote{Instance}
+از مساله تصمیم علیت است.
+
+\begin{definition}\label{def:w-projection}
+  فرض کنیم
+  $M=(U,V,F)$
+  یک مدل علّی و
+  $(M,u)$
+  یک دنیای علّی است
+  $(V={V_1,\cdots,V_n})$.
+  { \color{blue}
+    حذف و تصویر رو اینجا باید توضیح بدم.
+  }
+\end{definition}
+
+\begin{theorem}\label{th:conf-equiv}
+  با داشتن یک ساختمان رویداد
+  $\ES=(E,\#,\vdash)$
+  و مجموعه
+  $S = \set{e_1,\cdots,e_n} \subseteq E$،
+  داریم
+  \begin{equation*}
+    S \in \Conf(\ES) \iff
+    S \in \Con(E) \wedge
+    \exists \pi \in \Pi(S).\;
+    \varnothing \vdash \pi_1, \cdots,
+    \set{\pi_1,\cdots,\pi_{n-1}} \vdash \pi_n
+  \end{equation*}
+  که
+  $\Pi(S)$
+  مجموعه همه جایشگت‌های رویدادهای
+  $S$
+  است.
+\end{theorem}
+
+\begin{proof}
+  این قضیه را در هر دو جهت اثبات می‌کنیم.
+  \begin{itemize}
+    \item[$\implies$:]
+    این گزاره به صورت مستقیم از تعریف
+    \ref{def:configuration}
+    نتیجه می‌شود.
+    \item[$\impliedby$:]
+    از فرض مساله می‌توان نتیجه گرفت که حداقل
+    یک مسیر در شبکه پیکربندی‌های
+    $\ES$
+    از مجموعه تهی
+    ($\varnothing$)
+    تا $S$
+    وجود دارد؛ بنابر این،
+    $S$
+    یک پیکربندی
+    $\ES$
+    است و حکم اثبات می‌شود.
+  \end{itemize}
+\end{proof}
