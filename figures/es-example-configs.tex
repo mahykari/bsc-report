@@ -2,17 +2,16 @@
   \centering
   \def\W{2}
   \def\H{1.25}
-  \begin{tikzpicture}[scale=0.8]
+  \begin{tikzpicture}
       \node (null) at (0,0) {$\varnothing$};
-      \node (a) at (-\W,\H) {$\set{a}$};
-      \node (b) at (\W,\H)  {$\set{b}$};
-      \node (ab) at (0,2*\H) {$\set{a,b}$};
-      \node (abc) at (0,3*\H) {$\set{a,b,c}$};
+      \node (a)  at (-\W,  \H) {$\set{a}$};
+      \node (b)  at ( \W,  \H) {$\set{b}$};
+      \node (ac) at (-\W,2*\H) {$\set{a,c}$};
+      \node (bc) at ( \W,2*\H) {$\set{b,c}$};
       \draw[->] (null) -- (a);
       \draw[->] (null) -- (b);
-      \draw[->] (a) -- (ab);
-      \draw[->] (b) -- (ab);
-      \draw[->] (ab) -- (abc);
+      \draw[->] (a)    -- (ac);
+      \draw[->] (b)    -- (bc);
   \end{tikzpicture}
   \caption{
     شبکه پیکربندی‌های مثال
