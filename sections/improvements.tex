@@ -23,9 +23,65 @@
   $(M,u)$
   یک دنیای علّی است
   $(V={V_1,\cdots,V_n})$.
-  { \color{blue}
-    حذف و تصویر رو اینجا باید توضیح بدم.
-  }
+  \textit{حذف کردن}
+  متغیر
+  $V_i$
+  از
+  $(M,u)$
+  را به صورت زیر تعریف می‌کنیم:
+  \begin{enumerate}[label=(\alph*)]
+    \item $V_i$
+    را از
+    $V$
+    حذف می‌کنیم.
+    \item
+    به ازای هر فرزند
+    $V_i$
+    مانند
+    $X$،
+    در
+    $F_X$
+    به‌جای
+    $V_i$،
+    مقدار
+    $v_i=V_i(u)$
+    را جایگزین می‌کنیم.
+  \end{enumerate}
+  
+  \textit{تصویر}\LTRfootnote{Projection} $(M,u)$
+  روی متغیرهای
+  $V_1,\cdots,V_k$
+  را به صورت یک مدل علّی جدید تعریف می‌کنیم
+  که در آن، متغیرهای
+  $V_{k+1},\cdots,V_n$
+  از
+  $(M,u)$
+  حذف شده‌اند.
+  به همین ترتیب،
+  برای
+  $(M,u)$
+  \textit{تصویر $W$}\LTRfootnote{W-projection}
+  به‌ازای مساله علیت
+  $X$ و $Y$
+  را به صورت تصویر
+  $(M,u)$
+  روی متغیرهای زیر تعریف می‌کنیم:
+  \begin{enumerate}[label=(\alph*)]
+    \item $X,Y$
+    \item هر راسی مانند
+    $V^{XY}$
+    که در شبکه علّی مورد نظر،
+    روی مسیری از
+    $X$ به $Y$
+    قرار دارد.
+    \item $\Par(V)$
+    به ازای هر
+    $V$
+    که در مجموعه
+    $V^{XY}$ها
+    و $Y$
+    قرار دارد.
+  \end{enumerate}
 \end{definition}
 
 \begin{theorem}\label{th:conf-equiv}
@@ -51,11 +107,11 @@
 \begin{proof}
   این قضیه را در هر دو جهت اثبات می‌کنیم.
   \begin{itemize}
-    \item[$\implies$:]
+    \item $\implies$:
     این گزاره به صورت مستقیم از تعریف
     \ref{def:configuration}
     نتیجه می‌شود.
-    \item[$\impliedby$:]
+    \item $\impliedby$:
     از فرض مساله می‌توان نتیجه گرفت که حداقل
     یک مسیر در شبکه پیکربندی‌های
     $\ES$
