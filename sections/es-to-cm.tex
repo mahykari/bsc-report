@@ -1,0 +1,93 @@
+\section{ترجمه ساختمان رویداد به مدل علّی}\label{sec:es-to-cm}
+
+برای این‌که بتوانیم از تعریف علیت هالپرن و پرل
+برای یک ساختمان رویداد استفاده کنیم، بایستی ابتدا
+ساختمان رویداد را به صورت یک مدل علّی بیان کنیم. در ادامه
+روشی که توسط صیحانی و دیگران در
+\cite{seyhani2022}
+برای این ترجمه ارائه شده را توضیح می‌دهیم.
+
+\begin{definition}
+  مجموعه $Y$،
+  مجموعه $X$
+  را \textit{می‌پوشاند}
+  اگر و فقط اگر شرط زیر برقرار باشد:
+  \begin{equation*}
+    X \subset Y \wedge \left(
+      \forall Z.\;
+      X \subseteq Z \subseteq Y \implies Z=X \vee Z=Y 
+    \right)
+  \end{equation*}
+  رابطه پوشیده شدن
+  $X$ با $Y$
+  را به صورت
+  $X \prec Y$
+  نشان می‌دهیم.
+\end{definition}
+
+ساختمان رویداد
+$\ES=(E,\#,\vdash)$
+را در نظر بگیریم، که در آن
+$E=\set{e_1,\cdots,e_n}$.
+در ادامه مدل علّی
+$M=(U,V,F)$
+را برای این ساختمان تعریف می‌کنیم.
+
+مجموعه $U$
+را برابر مجموعه تهی در نظر می‌گیریم.
+برای مجموعه $V$
+متغیرهای زیر را در نظر می‌گیریم:
+\begin{align}
+  V = & \set{C_{e_i,e_j} \mid 1 \leq i < j \leq n} \cup \\
+  & \set{
+    EN_{S,e} \mid
+    S \subseteq E \wedge e \in E \wedge e \not\in S
+  } \cup \\
+  & \set{
+    M_{S,e} \mid
+    S \subseteq E \wedge e \in E \wedge e \not\in S
+  } \cup \set{PV}
+\end{align}
+
+متغیرهای
+$C$، $EN$ و $M$
+به ترتیب روابط تعارض، فعال‌سازی و فعال‌سازی کمینه
+را مدل می‌کنند. همچنین، متغیر
+$PV$
+برای نشان دادن رفتار ناامن در ساختمان رویداد
+(مطابق عبارت \ref{eq:unsafe-behavior})
+استفاده می‌شود که در بخش
+\ref{sec:improvements}
+راجع به آن بیشتر توضیح خواهیم داد.
+برای متغیرهای تعارض، داریم:
+\begin{equation*}
+  F_{C_{e,e'}} = \begin{cases}
+    \top  & e \# e' \\
+    \bot  & e \cancel{\#} e'
+  \end{cases}
+\end{equation*}
+
+برای تابع سایر متغیرها، دو تابع کمکی زیر را تعریف می‌کنیم:
+\begin{align*}
+  \Con(S) & =
+  \bigwedge_{e_i,e_j \in S \wedge i < j} \neg C_{e_i,e_j} \\
+  \Min(S,e) & = \bigwedge_{
+    S' \subseteq E.\;
+    (S' \prec S \vee S \prec S') \wedge e \not\in S'
+  } \neg M_{S',e}
+\end{align*}
+
+به این ترتیب، داریم:
+\begin{equation*}
+  F_{M_{S,e}} = \begin{cases}
+    \Min(S,e) \wedge \Con(S) & S \minen e \\
+    \bot                     & S \not\minen e
+  \end{cases}
+\end{equation*}
+
+\begin{equation*}
+  F_{EN_{S,e}} = \left(
+    M_{S,e} \vee
+    \left( \bigvee_{S' \prec S} EN_{S',e} \right)
+  \right) \wedge \Con(S)
+\end{equation*}
