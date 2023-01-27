@@ -253,10 +253,10 @@ $X$ به $Y$
 به این ترتیب، توصیف رفتار ناامن نیز به صورت زیر قابل انجام است:
 
 \begin{multline}\label{eq:unsafe-behavior-equiv-cm}
-  \exists S' \in S.\;S'\in \Conf(\ES) \iff \\
-  \bigvee_{S' \in S} \left(
-    \Con(S') \wedge
-    \bigvee_{\pi \in \Pi(S')} \left(
+  \exists S_i \in S.\;S_i \in \Conf(\ES) \iff \\
+  \bigvee_{S_i \in S} \left(
+    \Con(S_i) \wedge
+    \bigvee_{\pi \in \Pi(S_i)} \left(
       EN_{\varnothing, \pi_1} \wedge \cdots \wedge
       EN_{\set{\pi_1,\cdots,\pi_{n-1}}, \pi_n}
     \right)
