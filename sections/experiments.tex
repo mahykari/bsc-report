@@ -40,12 +40,53 @@ $W$ و $w$
 (متد \lr{\texttt{intervene}})
 با روش ساده‌تری اما پرهزینه‌تری پیاده‌سازی شده بودند.
 
-بهبود زمان اجرای متد
+\textbf{بهبود زمان اجرای متد
 \lr{\texttt{intervene}}
-به ساختن تنها یک کپی و سپس اعمال مقداردهی‌های ثابت
-روی این کپی
-(به‌جای روش یک کپی به‌ازای هر متغیر)
-محدود می‌شود.
+}
+در نسخه اولیه ابزار، متد
+\lr{\texttt{intervene}}
+که برای ثابت کردن مقدار چند متغیر استفاده می‌شود،
+به صورت زیر پیاده‌سازی شده بود:
+
+\begin{algorithm}
+  \caption{پیاده‌سازی اولیه متد
+  \lr{\texttt{intervene}}}
+  \begin{latin}
+  \begin{algorithmic}[1]
+    \Require{$M(U,V,F),W,w$}
+    \Ensure{$W \in V$}
+    \State $\mu \gets M$
+    \For{$W_i \in W$}
+      \State $\mu \gets \Copy(\mu)$
+      \State $F_{\mu,W_i} \gets w_i$
+    \EndFor
+    \State \Return $\mu$
+  \end{algorithmic}
+  \end{latin}
+\end{algorithm}
+
+در نسخه بهبود یافته،
+به جای ساختن یک کپی به‌ازای هر متغیر،
+تنها یک کپی ساخته می‌شود و سپس مقداردهی‌های ثابت
+روی این کپی اعمال می‌شود:
+
+\begin{algorithm}
+  \caption{پیاده‌سازی بهبود یافته متد
+  \lr{\texttt{intervene}}}
+  \begin{latin}
+  \begin{algorithmic}[1]
+    \Require{$M(U,V,F),W,w$}
+    \Ensure{$W \in V$}
+    \State $\mu \gets M$
+    \State $\mu \gets \Copy(\mu)$ \Comment{\lr{Only one copy}}
+    \For{$W_i \in W$}
+      \State $F_{\mu,W_i} \gets w_i$
+    \EndFor
+    \State \Return $\mu$
+  \end{algorithmic}
+  \end{latin}
+\end{algorithm}
+
 برای بهبود متد
 \lr{\texttt{evaluate}}
 از ویژگی بدون دور بودن مدل علّی بازگشتی استفاده می‌کنیم
@@ -63,6 +104,47 @@ $W$ و $w$
 زمان اجرای متد
 \lr{\texttt{evaluate}}
 را به صورت قابل توجهی کاهش می‌دهد.
+
+در نسخه اولیه ابزار، متد
+\lr{\texttt{evaluate}}
+بدون استفاده از فرض بدون دور بودن
+و به صورت ساده پیاده‌سازی شده بود:
+
+\begin{algorithm}
+  \caption{پیاده‌سازی اولیه متد
+  \lr{\texttt{intervene}}}
+  \begin{latin}
+  \begin{algorithmic}[1]
+    \Require{$M(U,V,F)$}
+    \For{$1 \leq \texttt{iter} \leq |V|$}
+      \For{$V_i \in V$}
+        \State $V_i \gets F_{V_i}(\Par(V_i))$
+      \EndFor
+    \EndFor
+  \end{algorithmic}
+  \end{latin}
+\end{algorithm}
+
+در نسخه بهبود یافته، این متد با کمک الگوریتم
+$\TopolSort$
+و استفاده از رابطه
+$\Par^{-1}$
+(مجموعه فرزندان یک راس)
+پیاده‌سازی شده است:
+
+\begin{algorithm}
+  \caption{پیاده‌سازی بهبود یافته متد
+  \lr{\texttt{intervene}}}
+  \begin{latin}
+  \begin{algorithmic}[1]
+    \Require{$M(U,V,F)$}
+    \State $V_{\texttt{sorted}} \gets \TopolSort(V, \Par^{-1})$
+    \For{$V_i \in V_{\texttt{sorted}}$}
+      \State $V_i \gets F_{V_i}(\Par(V_i))$
+    \EndFor
+  \end{algorithmic}
+  \end{latin}
+\end{algorithm}
 
 \subsection{بهبود روش حل مساله علیت}
 
