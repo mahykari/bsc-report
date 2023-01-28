@@ -1,0 +1,22 @@
+\begin{figure}
+  \centering
+  \def\W{2}
+  \def\H{1.25}
+  \begin{tikzpicture}
+    \node (null)    at (0,0)      {$\varnothing$};
+    \node (p1)      at (-\W,\H)   {$\set{p_1}$};
+    \node (q2)      at (\W,\H)    {$\set{q_2}$};
+    \node (p1q1)    at (-\W,2*\H) {$\set{p_1,q_1}$};
+    \node (q2p2)    at (\W,2*\H)  {$\set{q_2,p_2}$};
+    \node (p1q1ad1) at (-\W,3*\H) {$\set{p_1,q_1,ad_1}$};
+    \node (q2p2ad2) at (\W,3*\H)   {$\set{q_2,p_2,ad_2}$};
+
+    \path[->] (null) edge (p1) edge (q2);
+    \path[->] (p1) edge (p1q1);
+    \path[->] (q2) edge (q2p2);
+    \path[->] (p1q1) edge (p1q1ad1);
+    \path[->] (q2p2) edge (q2p2ad2);
+  \end{tikzpicture}
+  \caption{شبکه پیکربندی‌ها برای مثال لیست سیاه}
+  \label{fig:blacklist-configs}
+\end{figure}
